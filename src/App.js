@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
+import { nanoid } from 'nanoid';
+import Form from './Comoponents/Form/Form';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    contacts: [],
+    name: '',
+  };
+
+  handlerChange = e => this.setState({ name: e.target.value });
+
+  handlerClick = () =>
+    this.setState(({ contacts, name }) => {
+      contacts.push({ id: nanoid(), name });
+    });
+
+  render() {
+    const { name, contacts } = this.state;
+    return (
+      <>
+        <h2>Phonebook</h2>
+        <label htmlFor="name">
+          Name
+          <input
+            id="name"
+            type="text"
+            name="name"
+            onChange={this.handlerChange}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+          />
+        </label>
+        <button onClick={this.handlerClick}>Add contact</button>
+        <h2>Contacts</h2>
+        <ul>
+          {contacts.map(({ name, id }) => (
+            <li key={id}>
+              <p>{name}</p>
+            </li>
+          ))}
+        </ul>
+      </>
+    );
+  }
 }
 
 export default App;
