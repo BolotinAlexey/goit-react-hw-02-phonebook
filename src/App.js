@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import Form from './Comoponents/Form/Form';
+// import Form from './Comoponents/Form/Form';
 
 class App extends Component {
   state = {
@@ -16,7 +16,7 @@ class App extends Component {
     });
 
   render() {
-    const { name, contacts } = this.state;
+    const { contacts } = this.state;
     return (
       <>
         <h2>Phonebook</h2>
