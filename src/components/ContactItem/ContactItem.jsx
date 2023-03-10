@@ -1,12 +1,20 @@
+import { Item } from './ContactItem.styled';
+import PropTypes from 'prop-types';
+
 function ContactItem({ deleteRec, name, number }) {
   return (
-    <li>
+    <Item>
       <p>
         {name}: {number}
-        <button onClick={() => deleteRec(name)}>Delete</button>
       </p>
-    </li>
+      <button onClick={() => deleteRec(name)}>Delete</button>
+    </Item>
   );
 }
+ContactItem.propTypes = {
+  deleteRec: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+};
 
 export default ContactItem;

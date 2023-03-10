@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { Form } from './ContactForm.styled';
+import PropTypes from 'prop-types';
 
 class ContactForm extends Component {
   state = {
@@ -23,7 +25,7 @@ class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={e => this.handlerSubmit(e)}>
+      <Form onSubmit={e => this.handlerSubmit(e)}>
         <label htmlFor="name">Name </label>
         <input
           value={name}
@@ -35,7 +37,7 @@ class ContactForm extends Component {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-        <br />
+
         <label htmlFor="tel">Number </label>
         <input
           value={number}
@@ -49,9 +51,13 @@ class ContactForm extends Component {
         />
         <br />
         <button type="submit">Add contact</button>
-      </form>
+      </Form>
     );
   }
 }
+
+ContactForm.propTypes = {
+  onForm: PropTypes.func.isRequired,
+};
 
 export default ContactForm;

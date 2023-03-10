@@ -1,7 +1,10 @@
+import PropTypes from 'prop-types';
+import { Label } from './Filter.styled';
+
 function Filter({ handlerChangeFilter, value }) {
   return (
     <>
-      <label htmlFor="filter">Find contacts by name:</label>
+      <Label htmlFor="filter">Find contacts by name:</Label>
       <input
         id="filter"
         type="text"
@@ -12,5 +15,10 @@ function Filter({ handlerChangeFilter, value }) {
     </>
   );
 }
+
+Filter.propTypes = {
+  handlerChangeFilter: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default Filter;
