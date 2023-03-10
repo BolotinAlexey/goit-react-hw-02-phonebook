@@ -1,5 +1,7 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
+import ContactForm from './components/ContactForm/ContactForm';
+import Filter from './components/Filter/Filter';
+import ContactList from './components/ContactList/ContactList';
 
 class App extends Component {
   state = {
@@ -9,88 +11,52 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
+    // name: '',
+    // number: '',
     filter: '',
   };
 
-  handlerChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
+  // handlerChange = e => {
+  //   const { name, value } = e.target;
+  //   this.setState({ [name]: value });
+  // };
 
-  handlerSubmit = e => {
-    e.preventDefault();
+  // handlerSubmit = e => {
+  //   e.preventDefault();
+  //   this.setState(prev => {
+  //     let { name, number } = this.state;
+  //     e.target.reset();
+  //     return {
+  //       contacts: [{ id: nanoid(), name, number }, ...prev.contacts],
+  //     };
+  //   });
+  // };
+
+  handleForm = row => {
     this.setState(prev => {
-      let { name, number } = this.state;
-      e.target.reset();
       return {
-        contacts: [{ id: nanoid(), name, number }, ...prev.contacts],
+        contacts: [row, ...prev.contacts],
       };
     });
   };
 
-  handlerChangeFilter = e =>
-    this.setState(prev => {
-      return { filter: e.target.value };
-    });
-
-  defineList = () => {
-    const subStr = this.state.filter.toLowerCase();
-    return this.state.contacts.filter(({ name }) =>
-      name.toLowerCase().includes(subStr)
-    );
-  };
+  handlerChangeFilter = e => this.setState({ filter: e.target.value });
 
   render() {
-    const constVisible = this.defineList();
+    const { filter, contacts } = this.state;
     return (
       <>
-        <h2>Phonebook</h2>
-        <form onSubmit={this.handlerSubmit}>
-          <label htmlFor="name">Name </label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            onChange={this.handlerChange}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-          <br />
-          <label htmlFor="tel">Number </label>
-          <input
-            id="tel"
-            type="tel"
-            name="number"
-            onChange={this.handlerChange}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-          <br />
-          <button type="submit">Add contact</button>
-        </form>
+        <div>
+          <h1>Phonebook</h1>
+          <ContactForm onForm={this.handleForm} />
 
-        <h2>Contacts</h2>
-        <label htmlFor="filter">Find contacts by name:</label>
-        <input
-          id="filter"
-          type="text"
-          name="filter"
-          onChange={this.handlerChangeFilter}
-        />
-
-        <ul>
-          {constVisible.map(({ name, id, number }) => (
-            <li key={id}>
-              <p>
-                {name}: {number}
-              </p>
-            </li>
-          ))}
-        </ul>
+          <h2>Contacts</h2>
+          <Filter
+            value={filter}
+            handlerChangeFilter={this.handlerChangeFilter}
+          />
+          <ContactList filter={filter} contacts={contacts} />
+        </div>
       </>
     );
   }
