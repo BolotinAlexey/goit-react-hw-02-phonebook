@@ -12,10 +12,11 @@ function ContactList({ filter, contacts, onDelete }) {
     <Ul>
       {defineList().map(({ name, id, number }) => (
         <ContactItem
+          id={id}
           key={id}
           number={number}
           name={name}
-          deleteRec={name => onDelete(name)}
+          deleteRec={id => onDelete(id)}
         />
       ))}
     </Ul>

@@ -12,8 +12,8 @@ class App extends Component {
     filter: '',
   };
 
-  deleteContact = delName => {
-    const newList = this.state.contacts.filter(({ name }) => name !== delName);
+  deleteContact = delId => {
+    const newList = this.state.contacts.filter(({ id }) => id !== delId);
     this.setState({ contacts: newList });
   };
 

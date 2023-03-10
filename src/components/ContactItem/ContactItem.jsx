@@ -1,13 +1,13 @@
 import { Item } from './ContactItem.styled';
 import PropTypes from 'prop-types';
 
-function ContactItem({ deleteRec, name, number }) {
+function ContactItem({ deleteRec, name, number, id }) {
   return (
     <Item>
       <p>
         {name}: {number}
       </p>
-      <button onClick={() => deleteRec(name)}>Delete</button>
+      <button onClick={() => deleteRec(id)}>Delete</button>
     </Item>
   );
 }
