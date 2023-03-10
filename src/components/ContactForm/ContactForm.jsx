@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
 
 class ContactForm extends Component {
   state = {
@@ -11,7 +10,7 @@ class ContactForm extends Component {
     e.preventDefault();
     const { onForm } = this.props;
     let { name, number } = this.state;
-    onForm({ id: nanoid(), name, number });
+    onForm({ name, number });
     e.target.reset();
     this.setState({ name: '', number: '' });
   };

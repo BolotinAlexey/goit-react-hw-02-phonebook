@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
+
 import ContactForm from 'components/ContactForm/ContactForm';
 import Filter from 'components/Filter/Filter';
 import ContactList from 'components/ContactList/ContactList';
@@ -23,7 +25,7 @@ class App extends Component {
     }
     this.setState(prev => {
       return {
-        contacts: [row, ...prev.contacts],
+        contacts: [{ id: nanoid(), ...row }, ...prev.contacts],
       };
     });
   };
