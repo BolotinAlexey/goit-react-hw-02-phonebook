@@ -16,6 +16,11 @@ class App extends Component {
     filter: '',
   };
 
+  deleteContact = delName => {
+    const newList = this.state.contacts.filter(({ name }) => name !== delName);
+    this.setState({ contacts: newList });
+  };
+
   existRow = existName => alert(`Record ${existName} already exists`);
 
   handleForm = row => {
@@ -45,7 +50,11 @@ class App extends Component {
             value={filter}
             handlerChangeFilter={this.handlerChangeFilter}
           />
-          <ContactList filter={filter} contacts={contacts} />
+          <ContactList
+            filter={filter}
+            contacts={contacts}
+            onDelete={this.deleteContact}
+          />
         </div>
       </>
     );
