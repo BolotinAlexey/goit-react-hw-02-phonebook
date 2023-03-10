@@ -1,6 +1,6 @@
 function ContactItem({ id, name, number }) {
   return (
-    <li key={id}>
+    <li>
       <p>
         {name}: {number}
       </p>

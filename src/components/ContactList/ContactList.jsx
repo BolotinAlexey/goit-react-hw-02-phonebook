@@ -9,7 +9,7 @@ function ContactList({ filter, contacts }) {
   return (
     <ul>
       {defineList().map(({ name, id, number }) => (
-        <ContactItem id={id} number={number} name={name} />
+        <ContactItem key={id} number={number} name={name} />
       ))}
     </ul>
   );

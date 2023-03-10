@@ -11,28 +11,16 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    // name: '',
-    // number: '',
     filter: '',
   };
 
-  // handlerChange = e => {
-  //   const { name, value } = e.target;
-  //   this.setState({ [name]: value });
-  // };
-
-  // handlerSubmit = e => {
-  //   e.preventDefault();
-  //   this.setState(prev => {
-  //     let { name, number } = this.state;
-  //     e.target.reset();
-  //     return {
-  //       contacts: [{ id: nanoid(), name, number }, ...prev.contacts],
-  //     };
-  //   });
-  // };
+  existRow = existName => alert(`Record ${existName} already exists`);
 
   handleForm = row => {
+    if (this.state.contacts.find(({ name }) => name === row.name)) {
+      this.existRow(row.name);
+      return;
+    }
     this.setState(prev => {
       return {
         contacts: [row, ...prev.contacts],
