@@ -8,9 +8,23 @@ import ContactList from 'components/ContactList/ContactList';
 
 class App extends Component {
   state = {
-    contacts: initialData,
+    contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    const locStorageContacts = localStorage.getItem('contacts');
+    this.setState({
+      contacts: locStorageContacts
+        ? JSON.parse(locStorageContacts)
+        : initialData,
+    });
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts)
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  }
 
   deleteContact = delId => {
     const newList = this.state.contacts.filter(({ id }) => id !== delId);
